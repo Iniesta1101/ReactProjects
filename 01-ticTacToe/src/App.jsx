@@ -1,16 +1,12 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import './App.css'
-import Casilla from './components/Square.jsx';
-
+import './index.css'
+import Board from './components/Board.jsx';
 
 function App() {
-
-    return <h1>Tic Tac Toe</h1>
-
+        return(<Board/>);
     
-  
 }
 
 export default App
