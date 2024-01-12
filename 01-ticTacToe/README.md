@@ -1,4 +1,4 @@
-# Tres en Línea (Tic Tac Toe) con Bootstrap, React y JavaScript
+# Tres en Raya (Tic Tac Toe) con Bootstrap, React y JavaScript
 
 Este proyecto implementa el clásico juego del tres en línea utilizando tecnologías web modernas como Bootstrap, React y JavaScript. El juego ofrece tres posibilidades de resultado: victoria para la X, victoria para la O o un empate.
 
@@ -25,5 +25,6 @@ Este proyecto implementa el clásico juego del tres en línea utilizando tecnolo
 
 - Clona este repositorio y crea un Pull Request con tus cambios. 
 
+## Capturas
 
-
+![captura1](https://github.com/Iniesta1101/ReactProjects/assets/150248969/ceacfce1-0ee4-4aa2-8d95-a588d6c5e322)
