@@ -6,22 +6,48 @@ export default function PokemonCard(){
     async function datosPokemon(nombre){
         let pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${nombre}`);
         let datosPokemon = await pokemon.json();
-        return datosPokemon;
+        return {
+            id: datosPokemon.id,
+            name: datosPokemon.name,
+            img: datosPokemon.sprites.other.dream_world.front_default
+        };
     }
     useEffect(() => {
         async function getPokemons(){
             let kanto = await fetch("https://pokeapi.co/api/v2/pokedex/kanto");
             let datos = await kanto.json();
             let listaPokemons = [];
+
             for(const entrada of datos.pokemon_entries){
-                listaPokemons.push(await datosPokemon(entrada.pokemon_species.name))
+                listaPokemons.push(await datosPokemon(entrada.pokemon_species.name));
             }
-            setPokemons(listaPokemons)
+            setPokemons(listaPokemons);
         }
         getPokemons()
     }, [])
+
+    function pokemonId(id) {
+        if (id < 10) {
+            return "#00" + id;
+        } else if (id < 100) {
+            return "#0" + id;
+        } else {
+            return "#"+id;
+        }
+    }
     return <>{
-        pokemons.map(pokemon => <p>{pokemon.name}</p>)
+        
+        pokemons.map(pokemon => 
+            <div className="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3 col-xxl-3 justify-content-center d-flex align-items-center">
+                <div key={pokemon.id} class="card" style={{ width: '18rem' }}>
+                    <img src={pokemon.img} class="card-img-top" alt="Imagen pokemon"></img>
+                    <div className="card-body">
+                        <p>{pokemonId(pokemon.id)}</p>
+                        <h5 className="card-title">{pokemon.name}</h5>
+                    </div>
+                </div>
+            </div>
+        )
     }
     
   </>
