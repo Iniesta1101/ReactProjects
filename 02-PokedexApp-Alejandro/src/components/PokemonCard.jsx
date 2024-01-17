@@ -1,11 +1,13 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import {useEffect, useState} from 'react';
+import './PokemonCard.css';
 
 export default function PokemonCard(){
     const [pokemons, setPokemons] = useState([]);
     async function datosPokemon(nombre){
         let pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${nombre}`);
         let datosPokemon = await pokemon.json();
+        
         return {
             id: datosPokemon.id,
             name: datosPokemon.name,
@@ -38,15 +40,15 @@ export default function PokemonCard(){
     return <>{
         
         pokemons.map(pokemon => 
-            <div className="col-12 col-sm-6 col-md-6 col-lg-3 col-xl-3 col-xxl-3 justify-content-center d-flex align-items-center">
+            <div className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3 justify-content-center d-flex align-items-center mt-3">
                 <div key={pokemon.id} class="card" style={{ width: '18rem' }}>
-                    <img src={pokemon.img} class="card-img-top" alt="Imagen pokemon"></img>
+                    <img src={pokemon.img} className="card-img-top card-img mx-auto mt-3" alt={`Imagen de ${pokemon.name}`}></img>
                     <div className="card-body">
                         <p>{pokemonId(pokemon.id)}</p>
                         <h5 className="card-title">{pokemon.name}</h5>
                     </div>
                 </div>
-            </div>
+            </div> 
         )
     }
     
