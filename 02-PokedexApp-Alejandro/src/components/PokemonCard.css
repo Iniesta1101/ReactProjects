@@ -2,3 +2,175 @@
     width: 200px;
     height: 200px;
 }
+.type-img {
+    margin-right: 5px;
+    width: 15px;
+    height: 15px;
+  }
+
+.card-shadow {
+    box-shadow: 10px 10px 5px #8A795D;
+}
+
+.bug {
+    background-color: #8bd674;
+  }
+  
+  .dark {
+    background-color: #75747e;
+  }
+  
+  .dragon {
+    background-color: #1582e7;
+  }
+  
+  .electric {
+    background-color: #f2cb55; 
+  }
+  
+  .fairy {
+    background-color: #e98acc;
+  }
+  
+  .fighting {
+    background-color: #eb4971;
+  }
+  
+  .fire {
+    background-color: #ff9448;
+  }
+  
+  .flying {
+    background-color: #829edb;
+  }
+  
+  .ghost {
+    background-color: #6882d4;
+  }
+  
+  .grass {
+    background-color: #8bbe8a;
+  }
+  
+  .ground {
+    background-color: #f78551;
+  }
+  
+  .ice {
+    background-color: #6bddce;
+  }
+  
+  .normal {
+    background-color: #c5c9d6;
+  }
+  
+  .poison {
+    background-color: #bd5fe9;
+  }
+  
+  .psychic {
+    background-color: #ff787a;
+  }
+  
+  .rock {
+    background-color: #d5c895;
+  }
+  
+  .steel {
+    background-color: #4d92b4;
+  }
+  
+  .water {
+    background-color: #58abf6;
+  }
+
+  .bug2 {
+    background: #8cb230;
+    font-size: 15px;
+  }
+  
+  .dark2 {
+    background: #58575f;
+    font-size: 15px;
+  }
+  
+  .dragon2 {
+    background: #0f6ac0;
+    font-size: 15px;
+  }
+  
+  .electric2 {
+    background: #eed535;
+    font-size: 15px;
+  }
+  
+  .fairy2 {
+    background: #ed6ec7;
+    font-size: 15px;
+    
+  }
+  
+  .fighting2 {
+    background: #d04164;
+    font-size: 15px;
+  }
+  
+  .fire2 {
+    background: #fd7d24;
+    font-size: 15px;
+  }
+  
+  .flying2 {
+    background: #748fc9;
+    font-size: 15px;
+  }
+  
+  .ghost2 {
+    background: #556aae;
+    font-size: 15px;
+  }
+  
+  .grass2 {
+    background: #62b957;
+    font-size: 15px;
+  }
+  
+  .ground2 {
+    background: #dd7748;
+    font-size: 15px;
+  }
+  
+  .ice2 {
+    background: #61cec0;
+    font-size: 15px;
+  }
+  
+  .normal2 {
+    background: #9da0aa;
+    font-size: 15px;
+  }
+  
+  .poison2 {
+    background: #a552cc;
+    font-size: 15px;
+  }
+  
+  .psychic2 {
+    background: #ea5d60;
+    font-size: 15px;
+  }
+  
+  .rock2 {
+    background: #baab82;
+    font-size: 15px;
+  }
+  
+  .steel2 {
+    background: #417d9a;
+    font-size: 15px;
+  }
+  
+  .water2 {
+    background: #4a90da;
+    font-size: 15px;
+  }
