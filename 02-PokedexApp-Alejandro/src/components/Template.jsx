@@ -11,9 +11,7 @@ export default function Template(){
                     <img src="../src/assets/title.png" className="img"/>
                 </div>
                 <Buscador/>
-                <div className="row">    
-                    <PokemonCard/>
-                </div>
+                
             </div>
         </>
     )

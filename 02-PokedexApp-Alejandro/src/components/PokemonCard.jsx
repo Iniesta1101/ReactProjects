@@ -2,7 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import {useEffect, useState} from 'react';
 import './PokemonCard.css';
 
-export default function PokemonCard(){
+export default function PokemonCard({pokemonName}){
     const [pokemons, setPokemons] = useState([]);
     async function datosPokemon(nombre){
         let pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${nombre}`);
@@ -24,12 +24,15 @@ export default function PokemonCard(){
             let listaPokemons = [];
 
             for(const entrada of datos.pokemon_entries){
-                listaPokemons.push(await datosPokemon(entrada.pokemon_species.name));
+                let pokemon = await datosPokemon(entrada.pokemon_species.name);
+                if (pokemonName==null || pokemon.name.toLowerCase().includes(pokemonName.toLowerCase())) {
+                    listaPokemons.push(pokemon);
+                  }
             }
             setPokemons(listaPokemons);
         }
         getPokemons()
-    }, [])
+    }, [pokemonName])
 
     function pokemonId(id) {
         if (id < 10) {
