@@ -1,7 +1,7 @@
 
 export default function Buscador(){
     
-    return(<>
+    return<>
         <div className="row">
             <div className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3 justify-content-center d-flex mt-5">
                 <form id="searchForm">
@@ -12,7 +12,7 @@ export default function Buscador(){
                 </form>
             </div>
         </div>
-    </>)
+    </>
     
     
 }
