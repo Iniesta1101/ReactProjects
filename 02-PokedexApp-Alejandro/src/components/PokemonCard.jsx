@@ -1,9 +1,14 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import {useEffect, useState} from 'react';
 import './PokemonCard.css';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import PoekemonModal from "./PokemonModal";
 
 export default function PokemonCard({pokemonName}){
     const [pokemons, setPokemons] = useState([]);
+    const [modalShow, setModalShow] = useState(false);
+
     async function datosPokemon(nombre){
         let pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${nombre}`);
         let datosPokemon = await pokemon.json();
@@ -47,25 +52,27 @@ export default function PokemonCard({pokemonName}){
         
         pokemons.map(pokemon => 
             <div className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3 justify-content-center d-flex align-items-center mt-5" key={pokemon.id}>
-                <div key={pokemon.id} className={`card card-shadow ${pokemon.types[0]}`} style={{ width: '18rem' }}>
-                    <img src={pokemon.img} className="card-img-top card-img mx-auto mt-3" alt={`Imagen de ${pokemon.name}`}></img>
-                    <div className="card-body">
-                        <h3 className="card-title">{pokemon.name}</h3>
-                        <p>{pokemonId(pokemon.id)}</p>
-                        <div className="d-flex">
-                        {pokemon.types.map((type, index) => (
-                            <div class={`badge ${type}2 d-flex me-2 align-items-center`}>
-                                <img src={`../src/assets/types-icons/${type}.svg`} className="type-img"/>
-                                <p key={index} className="me-4 m-0 ms-2">{type}</p>
-                            </div> 
-                        ))}
+                <Button className="boton" onClick={() => setModalShow(true)}>
+                    <div key={pokemon.id} className={`card card-shadow ${pokemon.types[0]}`} style={{ width: '18rem' }}>
+                        <img src={pokemon.img} className="card-img-top card-img mx-auto mt-3" alt={`Imagen de ${pokemon.name}`}></img>
+                        <div className="card-body">
+                            <h3 className="card-title">{pokemon.name}</h3>
+                            <p>{pokemonId(pokemon.id)}</p>
+                            <div className="d-flex">
+                            {pokemon.types.map((type, index) => (
+                                <div class={`badge ${type}2 d-flex me-2 align-items-center`}>
+                                    <img src={`../src/assets/types-icons/${type}.svg`} className="type-img"/>
+                                    <p key={index} className="me-4 m-0 ms-2">{type}</p>
+                                </div> 
+                            ))}
+                            </div>
                         </div>
                     </div>
-                </div>
+                </Button>
             </div> 
         )
     }
-    
+    <PoekemonModal modalShow={modalShow} setModalShow={setModalShow}></PoekemonModal>
   </>
     
 }
