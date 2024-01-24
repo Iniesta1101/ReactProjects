@@ -14,12 +14,18 @@ export default function PokemonCard({pokemonBuscado}){
         let datosPokemon = await pokemon.json();
         
         const types = datosPokemon.types.map(tipo => tipo.type.name);
+        const abilities = datosPokemon.abilities.map(habilidad => habilidad.ability.name);
 
         return {
             id: datosPokemon.id,
             name: datosPokemon.name,
             img: datosPokemon.sprites.other.dream_world.front_default,
-            types: types
+            types: types,
+            height: datosPokemon.height,
+            weight: datosPokemon.weight,
+            abilities: abilities,
+            
+
         };
     }
     useEffect(() => {
@@ -54,12 +60,12 @@ export default function PokemonCard({pokemonBuscado}){
                             <h3 className="card-title">{pokemon.name}</h3>
                             <p>{pokemonId(pokemon.id)}</p>
                             <div className="d-flex">
-                            {pokemon.types.map((type, index) => (
-                                <div class={`badge ${type}2 d-flex me-2 align-items-center`}>
-                                    <img src={`../src/assets/types-icons/${type}.svg`} className="type-img"/>
-                                    <p key={index} className="me-4 m-0 ms-2">{type}</p>
-                                </div> 
-                            ))}
+                                {pokemon.types.map((type, index) => (
+                                    <div className={`badge ${type}2 d-flex me-2 align-items-center`}>
+                                        <img src={`../src/assets/types-icons/${type}.svg`} className="type-img"/>
+                                        <p key={index} className="me-4 m-0 ms-2">{type}</p>
+                                    </div> 
+                                ))}
                             </div>
                         </div>
                     </div>

@@ -1,5 +1,4 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import PokemonCard from './PokemonCard.jsx';
 import './Template.css';
 import Buscador from "./Buscador.jsx";
 
