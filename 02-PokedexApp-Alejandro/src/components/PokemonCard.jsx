@@ -2,12 +2,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import {useEffect, useState} from 'react';
 import './PokemonCard.css';
 import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import PoekemonModal from "./PokemonModal";
+import PokemonModal from "./PokemonModal";
 
-export default function PokemonCard({pokemonName}){
+export default function PokemonCard({pokemonBuscado}){
     const [pokemons, setPokemons] = useState([]);
     const [modalShow, setModalShow] = useState(false);
+    const [selectedPokemon, setSelectedPokemon] = useState(null)
 
     async function datosPokemon(nombre){
         let pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${nombre}`);
@@ -30,29 +30,24 @@ export default function PokemonCard({pokemonName}){
 
             for(const entrada of datos.pokemon_entries){
                 let pokemon = await datosPokemon(entrada.pokemon_species.name);
-                if (pokemonName==null || pokemon.name.toLowerCase().includes(pokemonName.toLowerCase())) {
+                if (pokemonBuscado==null || pokemon.name.toLowerCase().includes(pokemonBuscado.toLowerCase()) || pokemon.id == pokemonBuscado) {
                     listaPokemons.push(pokemon);
-                  }
+                }
             }
             setPokemons(listaPokemons);
         }
         getPokemons()
-    }, [pokemonName])
+    }, [pokemonBuscado])
 
-    function pokemonId(id) {
-        if (id < 10) {
-            return "#00" + id;
-        } else if (id < 100) {
-            return "#0" + id;
-        } else {
-            return "#"+id;
-        }
+    const handleClick = (id) => {
+        setSelectedPokemon(id);
+        setModalShow(true)
     }
     return <>{
         
         pokemons.map(pokemon => 
             <div className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3 justify-content-center d-flex align-items-center mt-5" key={pokemon.id}>
-                <Button className="boton" onClick={() => setModalShow(true)}>
+                <Button className="boton" onClick={() => handleClick(pokemon.id)}>
                     <div key={pokemon.id} className={`card card-shadow ${pokemon.types[0]}`} style={{ width: '18rem' }}>
                         <img src={pokemon.img} className="card-img-top card-img mx-auto mt-3" alt={`Imagen de ${pokemon.name}`}></img>
                         <div className="card-body">
@@ -72,7 +67,18 @@ export default function PokemonCard({pokemonName}){
             </div> 
         )
     }
-    <PoekemonModal modalShow={modalShow} setModalShow={setModalShow}></PoekemonModal>
+    
+    <PokemonModal modalShow={modalShow} setModalShow={setModalShow} selectedPokemon={selectedPokemon} pokemons={pokemons}></PokemonModal>
   </>
     
+}
+
+export function pokemonId(id){
+    if (id < 10) {
+        return "#00" + id;
+    } else if (id < 100) {
+        return "#0" + id;
+    } else {
+        return "#"+id;
+    }
 }
