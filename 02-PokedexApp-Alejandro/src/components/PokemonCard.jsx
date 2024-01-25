@@ -3,11 +3,13 @@ import {useEffect, useState} from 'react';
 import './PokemonCard.css';
 import Button from 'react-bootstrap/Button';
 import PokemonModal from "./PokemonModal";
+import Cargando from './Carga.jsx';
 
 export default function PokemonCard({pokemonBuscado}){
     const [pokemons, setPokemons] = useState([]);
     const [modalShow, setModalShow] = useState(false);
     const [selectedPokemon, setSelectedPokemon] = useState(null)
+    const [loading, setLoading] = useState(true)
 
     async function datosPokemon(nombre){
         let pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${nombre}`);
@@ -30,6 +32,7 @@ export default function PokemonCard({pokemonBuscado}){
     }
     useEffect(() => {
         async function getPokemons(){
+            try{
             let kanto = await fetch("https://pokeapi.co/api/v2/pokedex/kanto");
             let datos = await kanto.json();
             let listaPokemons = [];
@@ -41,6 +44,11 @@ export default function PokemonCard({pokemonBuscado}){
                 }
             }
             setPokemons(listaPokemons);
+            }catch(error){
+                console.log(error)
+            }finally{
+                setLoading(false);
+            }
         }
         getPokemons()
     }, [pokemonBuscado])
@@ -50,7 +58,6 @@ export default function PokemonCard({pokemonBuscado}){
         setModalShow(true)
     }
     return <>{
-        
         pokemons.map(pokemon => 
             <div className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3 justify-content-center d-flex align-items-center mt-5" key={pokemon.id}>
                 <Button className="boton" onClick={() => handleClick(pokemon.id)}>
