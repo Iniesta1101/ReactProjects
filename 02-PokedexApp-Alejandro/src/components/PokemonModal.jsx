@@ -9,13 +9,13 @@ function PokemonModal({modalShow, setModalShow, selectedPokemon, pokemons}) {
   return (
     <>
     {pokemon && (
-      <Modal size="lg" show={modalShow} onHide={() => setModalShow(false)} aria-labelledby="example-modal-sizes-title-lg" className={`${pokemon.types[0]}`}>
-        <Modal.Header closeButton>
+      <Modal size="lg" show={modalShow} onHide={() => setModalShow(false)} aria-labelledby="example-modal-sizes-title-lg" >
+        <Modal.Header closeButton className={`${pokemon.types[0]}`}>
           <Modal.Title id="example-modal-sizes-title-lg">
             <p>{pokemonId(selectedPokemon)}</p>
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body >
+        <Modal.Body className={`${pokemon.types[0]}`}>
           
             <div className="container-fluid">
               <div className='row'>
@@ -55,7 +55,7 @@ export default PokemonModal;
 function Boton({name, type, pokemon}){
   return( 
   <div key={pokemon.id} className="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-xxl-3 mt-4 justify-content-center d-flex">
-    <button type="button" className={`${type} btn btn-lg btn-block`}>{name}</button>
+    <button type="button" className={`${type} btn btn-lg btn-block btn-outline-light`}>{name}</button>
   </div>
   )
 }

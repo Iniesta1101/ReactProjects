@@ -57,6 +57,9 @@ export default function PokemonCard({pokemonBuscado}){
         setSelectedPokemon(id);
         setModalShow(true)
     }
+    {if(pokemons != null){
+
+    
     return <>{
         pokemons.map(pokemon => 
             <div className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3 justify-content-center d-flex align-items-center mt-5" key={pokemon.id}>
@@ -83,7 +86,9 @@ export default function PokemonCard({pokemonBuscado}){
     
     <PokemonModal modalShow={modalShow} setModalShow={setModalShow} selectedPokemon={selectedPokemon} pokemons={pokemons}></PokemonModal>
   </>
-    
+    }else{
+        return(<Cargando/>)
+    }}
 }
 
 export function pokemonId(id){
