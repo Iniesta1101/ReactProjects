@@ -2,10 +2,23 @@ import Modal from 'react-bootstrap/Modal';
 import { pokemonId } from './PokemonCard';
 import './PokemonCard.css';
 import "bootstrap/dist/css/bootstrap.min.css";
+import Button from 'react-bootstrap/Button'; 
+import  Collapse  from 'react-bootstrap/Collapse'; 
+import { useEffect, useState } from 'react';
 
 function PokemonModal({modalShow, setModalShow, selectedPokemon, pokemons}) {
   const pokemon = pokemons[selectedPokemon - 1]
+  const [openCollapse, setOpenCollapse] = useState(null)
 
+  useEffect(() => {
+    if(!modalShow){
+      setOpenCollapse(null)
+    }
+  }, [modalShow])
+
+  function handleClick(id){
+    setOpenCollapse((prevId) => (prevId === id ? null : id));
+  }
   return (
     <>
     {pokemon && (
@@ -35,14 +48,15 @@ function PokemonModal({modalShow, setModalShow, selectedPokemon, pokemons}) {
                 </div>
               </div>
               <div className='row'>
-                <Boton name={"Stats"} type={pokemon.types[0]} pokemon={pokemon}></Boton>
-                <Boton name={"algo"} type={pokemon.types[0]} pokemon={pokemon}></Boton>
-                <Boton name={"algo"} type={pokemon.types[0]} pokemon={pokemon}></Boton>
-                <Boton name={"algo"} type={pokemon.types[0]} pokemon={pokemon}></Boton>
+                {["ABOUT", "STATS", "algo", "CHAIN EVOLUTION"].map((name, index) => (
+                  <Boton key={index}
+                  name={name}
+                  pokemon={pokemon}
+                  isOpen={openCollapse === index}
+                  onClick={() => handleClick(index)}/>
+                ))}
               </div>
             </div>
-          
-          
         </Modal.Body>
       </Modal>
       )}
@@ -52,10 +66,17 @@ function PokemonModal({modalShow, setModalShow, selectedPokemon, pokemons}) {
 
 export default PokemonModal;
 
-function Boton({name, type, pokemon}){
-  return( 
-  <div key={pokemon.id} className="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-xxl-3 mt-4 justify-content-center d-flex">
-    <button type="button" className={`${type} btn btn-lg btn-block btn-outline-light`}>{name}</button>
-  </div>
+function Boton({name, pokemon, isOpen, onClick}){
+  return(<> 
+   
+      <Button className="btn mt-3" onClick={onClick} variant={isOpen ? "light" : "outline-light"}>
+        {name}
+      </Button>
+      <Collapse in={isOpen}>
+        <div className="card card-body mt-2">
+          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+        </div>
+      </Collapse>
+ </> 
   )
 }
