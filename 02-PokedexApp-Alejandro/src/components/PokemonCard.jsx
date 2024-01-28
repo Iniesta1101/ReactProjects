@@ -15,9 +15,24 @@ export default function PokemonCard({pokemonBuscado}){
         let pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${nombre}`);
         let datosPokemon = await pokemon.json();
         
+        let zona = await fetch(`https://pokeapi.co/api/v2/pokemon/${nombre}/encounters`)
+        let zonaCaptura = await zona.json();
+
+        let pokemon2 = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${nombre}`)
+        let datosPokemon2 = await pokemon2.json();
+
         const types = datosPokemon.types.map(tipo => tipo.type.name);
         const abilities = datosPokemon.abilities.map(habilidad => habilidad.ability.name);
+        const moves = datosPokemon.moves.map(move => ({
+            name: move.move.name,
+            level: move.version_group_details[0].level_learned_at
+        }))
+        const stats = datosPokemon.stats.map(stat => ({
+            name: stat.stat.name,
+            value: stat.base_stat            
+        }))
 
+        const zonaCapturas = zonaCaptura.map(zonas => zonas.location_area.name);
         return {
             id: datosPokemon.id,
             name: datosPokemon.name,
@@ -26,6 +41,11 @@ export default function PokemonCard({pokemonBuscado}){
             height: datosPokemon.height,
             weight: datosPokemon.weight,
             abilities: abilities,
+            specie: datosPokemon.species.name,
+            stats: stats,
+            zonaCapturas: zonaCapturas,
+            moves: moves,
+            description: datosPokemon2.flavor_text_entries[0].flavor_text 
         };
     }
     useEffect(() => {
@@ -43,7 +63,7 @@ export default function PokemonCard({pokemonBuscado}){
             setPokemons(listaPokemons);
         }
         getPokemons()
-    }, [pokemonBuscado])
+    }, [pokemonBuscado, pokemonId])
 
     const handleClick = (id) => {
         setSelectedPokemon(id);
@@ -52,18 +72,18 @@ export default function PokemonCard({pokemonBuscado}){
     {if(pokemons.length > 0){
     return <>{
         pokemons.map(pokemon => 
-            <div className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3 justify-content-center d-flex align-items-center mt-5" key={pokemon.id}>
+            <div className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3 justify-content-center d-flex align-items-center mt-5">
                 <Button className="boton" onClick={() => handleClick(pokemon.id)}>
-                    <div key={pokemon.id} className={`card card-shadow ${pokemon.types[0]}`} style={{ width: '18rem' }}>
+                    <div className={`card card-shadow ${pokemon.types[0]}`} style={{ width: '18rem' }}>
                         <img src={pokemon.img} className="card-img-top card-img mx-auto mt-3" alt={`Imagen de ${pokemon.name}`}></img>
                         <div className="card-body">
                             <h3 className="card-title">{pokemon.name}</h3>
                             <p>{pokemonId(pokemon.id)}</p>
                             <div className="d-flex">
-                                {pokemon.types.map((type, index) => (
+                                {pokemon.types.map((type) => (
                                     <div className={`badge ${type}2 d-flex me-2 align-items-center`}>
                                         <img src={`../src/assets/types-icons/${type}.svg`} className="type-img"/>
-                                        <p key={index} className="me-4 m-0 ms-2">{type}</p>
+                                        <p className="me-4 m-0 ms-2">{type}</p>
                                     </div> 
                                 ))}
                             </div>

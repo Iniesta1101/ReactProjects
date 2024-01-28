@@ -7,7 +7,7 @@ export default function Template(){
         <>
             <div className="container-fluid">
                 <div className="row justify-content-center mt-4">
-                    <img src="../src/assets/title.png" className="img"/>
+                    <img src="../src/assets/title.png" className="img" alt="Pokemon"/>
                 </div>
                 <Buscador/>
                 

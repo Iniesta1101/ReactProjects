@@ -5,6 +5,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Button from 'react-bootstrap/Button'; 
 import  Collapse  from 'react-bootstrap/Collapse'; 
 import { useEffect, useState } from 'react';
+import About from './ModalContent/About';
+import Stats from './ModalContent/Stats';
+import Moves from './ModalContent/Moves';
+import Evolution from './ModalContent/Evolution';
 
 function PokemonModal({modalShow, setModalShow, selectedPokemon, pokemons}) {
   const pokemon = pokemons[selectedPokemon - 1]
@@ -48,12 +52,13 @@ function PokemonModal({modalShow, setModalShow, selectedPokemon, pokemons}) {
                 </div>
               </div>
               <div className='row'>
-                {["ABOUT", "STATS", "algo", "CHAIN EVOLUTION"].map((name, index) => (
+                {["ABOUT", "STATS", "MOVES", "CHAIN EVOLUTION"].map((name, index) => (
                   <Boton key={index}
                   name={name}
                   pokemon={pokemon}
                   isOpen={openCollapse === index}
-                  onClick={() => handleClick(index)}/>
+                  onClick={() => handleClick(index)} id={index}
+                  />
                 ))}
               </div>
             </div>
@@ -66,7 +71,25 @@ function PokemonModal({modalShow, setModalShow, selectedPokemon, pokemons}) {
 
 export default PokemonModal;
 
-function Boton({name, pokemon, isOpen, onClick}){
+function Boton({name, pokemon, isOpen, onClick, id}){
+  let content;
+
+  switch (id) {
+    case 0:
+      content = <About pokemon={pokemon} />;
+      break;
+    case 1:
+      content = <Stats pokemon={pokemon}/>;
+      break;
+    case 2:
+      content = <Moves pokemon={pokemon}/>
+      break;
+    case 3:
+      content = <Evolution pokemon={pokemon}/>
+      break;
+    default:
+      content = <p>Invalid button id</p>;
+  }
   return(<> 
    
       <Button className="btn mt-3" onClick={onClick} variant={isOpen ? "light" : "outline-light"}>
@@ -74,7 +97,7 @@ function Boton({name, pokemon, isOpen, onClick}){
       </Button>
       <Collapse in={isOpen}>
         <div className="card card-body mt-2">
-          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+          {content}
         </div>
       </Collapse>
  </> 
