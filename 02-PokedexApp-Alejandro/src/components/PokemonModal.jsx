@@ -26,7 +26,7 @@ function PokemonModal({modalShow, setModalShow, selectedPokemon, pokemons}) {
   return (
     <>
     {pokemon && (
-      <Modal size="lg" show={modalShow} onHide={() => setModalShow(false)} aria-labelledby="example-modal-sizes-title-lg" >
+      <Modal size="lg" show={modalShow} onHide={() => setModalShow(false)} aria-labelledby="example-modal-sizes-title-lg">
         <Modal.Header closeButton className={`${pokemon.types[0]}`}>
           <Modal.Title id="example-modal-sizes-title-lg">
             <p>{pokemonId(selectedPokemon)}</p>
@@ -58,6 +58,7 @@ function PokemonModal({modalShow, setModalShow, selectedPokemon, pokemons}) {
                   pokemon={pokemon}
                   isOpen={openCollapse === index}
                   onClick={() => handleClick(index)} id={index}
+                  pokemons = {pokemons}
                   />
                 ))}
               </div>
@@ -71,7 +72,7 @@ function PokemonModal({modalShow, setModalShow, selectedPokemon, pokemons}) {
 
 export default PokemonModal;
 
-function Boton({name, pokemon, isOpen, onClick, id}){
+function Boton({name, pokemon, isOpen, onClick, id, pokemons}){
   let content;
 
   switch (id) {
@@ -85,7 +86,7 @@ function Boton({name, pokemon, isOpen, onClick, id}){
       content = <Moves pokemon={pokemon}/>
       break;
     case 3:
-      content = <Evolution pokemon={pokemon}/>
+      content = <Evolution pokemon={pokemon} pokemons={pokemons}/>
       break;
     default:
       content = <p>Invalid button id</p>;

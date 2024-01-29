@@ -20,6 +20,12 @@ export default function PokemonCard({pokemonBuscado}){
 
         let pokemon2 = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${nombre}`)
         let datosPokemon2 = await pokemon2.json();
+        
+        let evolucion = await fetch(datosPokemon2.evolution_chain.url);
+        let cadena = await evolucion.json();
+        const cadenaEvolucion = obtenerEvolucion(cadena.chain, {})
+
+
 
         const types = datosPokemon.types.map(tipo => tipo.type.name);
         const abilities = datosPokemon.abilities.map(habilidad => habilidad.ability.name);
@@ -45,7 +51,8 @@ export default function PokemonCard({pokemonBuscado}){
             stats: stats,
             zonaCapturas: zonaCapturas,
             moves: moves,
-            description: datosPokemon2.flavor_text_entries[0].flavor_text 
+            description: datosPokemon2.flavor_text_entries[0].flavor_text,
+            cadena: cadenaEvolucion 
         };
     }
     useEffect(() => {
@@ -108,5 +115,21 @@ export function pokemonId(id){
         return "#0" + id;
     } else {
         return "#"+id;
+    }
+}
+
+function obtenerEvolucion(cadena, dic){
+    if(cadena){
+        let pokemonInicial = cadena.species.name;
+        dic[pokemonInicial] = cadena.evolution_details.length > 0 ? cadena.evolution_details[0].min_level : 0;
+
+        if(cadena.evolves_to.length > 0){
+            for(const evolucion of cadena.evolves_to){
+                obtenerEvolucion(evolucion, dic)
+            }
+        }
+        return dic
+    }else{
+        return null
     }
 }
