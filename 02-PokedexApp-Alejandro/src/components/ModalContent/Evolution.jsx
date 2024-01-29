@@ -9,14 +9,15 @@ export default function Evolution({pokemon, pokemons}){
        <dl className="row">
         {pokemon.cadena &&
           (() => {
-            let img;
             const elements = [];
             for (const pokemonName in pokemon.cadena) {
-                for(let e of pokemons){
-                    if(e.name === pokemonName){
-                        img = e.img
-                        break;
-                    }
+              let img;
+              if (pokemon.cadena.hasOwnProperty(pokemonName)) {
+                for (let e of pokemons) {
+                  if (e.name === pokemonName) {
+                    img = e.img;
+                    break;
+                  }
                 }
                 elements.push(
                   <div key={pokemonName}>
@@ -26,7 +27,7 @@ export default function Evolution({pokemon, pokemons}){
                     </dd>
                   </div>
                 );
-              
+              }
             }
             return elements;
           })()}
