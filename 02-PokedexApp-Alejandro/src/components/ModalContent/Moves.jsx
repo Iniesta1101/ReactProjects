@@ -4,10 +4,10 @@ export default function Moves({pokemon}){
     return(<>
         <dl className="row">
         <dt className="col-sm-3">
-            {pokemon.moves.map(move => <p>Level {move.level}</p>)}
+            {pokemon.moves.map((move, index) => <p key={index}>Level {move.level}</p>)}
             </dt>
             <dd className="col-sm-9">
-                {pokemon.moves.map(move => <p>{move.name}</p>)}
+                {pokemon.moves.map(move => <p key={move.name} >{move.name}</p>)}
             </dd>
         </dl>
     

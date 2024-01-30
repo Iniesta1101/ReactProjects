@@ -43,9 +43,9 @@ function PokemonModal({modalShow, setModalShow, selectedPokemon, pokemons}) {
                   <h3>{pokemon.name}</h3>
                     <div className="d-flex">
                       {pokemon.types.map((type, index) => (
-                        <div className={`badge ${type}2 d-flex me-2 align-items-center mt-3`}>
+                        <div key={index} className={`badge ${type}2 d-flex me-2 align-items-center mt-3`}>
                           <img src={`../src/assets/types-icons/${type}.svg`} className="type-img"/>
-                          <p key={index} className="me-5 m-0 ms-2">{type}</p>
+                          <p className="me-5 m-0 ms-2">{type}</p>
                         </div> 
                       ))}
                     </div>

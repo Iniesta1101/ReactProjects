@@ -17,12 +17,12 @@ export default function About({pokemon}){
 
             <dt className="col-sm-3">Abilities</dt>
             <dd className="col-sm-9">
-                {pokemon.abilities.map(habilidad => <p>{habilidad}</p>)}
+                {pokemon.abilities.map(habilidad => <p key={habilidad} >{habilidad}</p>)}
             </dd>
             
             <dt className="col-sm-3">Capture Zone</dt>
             <dd className="col-sm-9">
-                {pokemon.zonaCapturas.map(zona => <p>{zona}</p>)}
+                {pokemon.zonaCapturas.map(zona => <p key={zona} >{zona}</p>)}
             </dd>
         </dl>
     

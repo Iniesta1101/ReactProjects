@@ -63,23 +63,28 @@ export default function PokemonCard({pokemonBuscado}){
 
             for(const entrada of datos.pokemon_entries){
                 let pokemon = await datosPokemon(entrada.pokemon_species.name);
-                if (pokemonBuscado==null || pokemon.name.toLowerCase().includes(pokemonBuscado.toLowerCase()) || pokemon.id == pokemonBuscado) {
                     listaPokemons.push(pokemon);
-                }
             }
             setPokemons(listaPokemons);
         }
         getPokemons()
-    }, [pokemonBuscado, pokemonId])
+    }, [])
 
     const handleClick = (id) => {
         setSelectedPokemon(id);
         setModalShow(true)
     }
+
+    const filteredPokemons = pokemons.filter((pokemon) =>
+        pokemon.name.toLowerCase().includes(pokemonBuscado.toLowerCase()) ||
+        pokemon.id.toString() === pokemonBuscado ||
+        pokemon.types.includes(pokemonBuscado.toLowerCase())
+    );
+
     {if(pokemons.length > 0){
     return <>{
-        pokemons.map(pokemon => 
-            <div className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3 justify-content-center d-flex align-items-center mt-5">
+        filteredPokemons.map(pokemon => 
+            <div key = {pokemon.id} className="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3 justify-content-center d-flex align-items-center mt-5">
                 <Button className="boton" onClick={() => handleClick(pokemon.id)}>
                     <div className={`card card-shadow ${pokemon.types[0]}`} style={{ width: '18rem' }}>
                         <img src={pokemon.img} className="card-img-top card-img mx-auto mt-3" alt={`Imagen de ${pokemon.name}`}></img>
@@ -88,8 +93,8 @@ export default function PokemonCard({pokemonBuscado}){
                             <p>{pokemonId(pokemon.id)}</p>
                             <div className="d-flex">
                                 {pokemon.types.map((type) => (
-                                    <div className={`badge ${type}2 d-flex me-2 align-items-center`}>
-                                        <img src={`../src/assets/types-icons/${type}.svg`} className="type-img"/>
+                                    <div key={type} className={`badge ${type}2 d-flex me-2 align-items-center`}>
+                                        <img src={`../src/assets/types-icons/${type}.svg`} className="type-img" alt={`Imagen de ${type}`}/>
                                         <p className="me-4 m-0 ms-2">{type}</p>
                                     </div> 
                                 ))}
