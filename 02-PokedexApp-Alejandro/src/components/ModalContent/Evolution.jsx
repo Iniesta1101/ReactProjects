@@ -19,14 +19,19 @@ export default function Evolution({pokemon, pokemons}){
                     break;
                   }
                 }
-                elements.push(
-                  <div key={pokemonName}>
-                    <dt className="col-sm-3">Level {pokemon.cadena[pokemonName]} {pokemonName}</dt>
-                    <dd className="col-sm-9">
-                      <img src={img} alt={`Imagen de ${pokemonName}`} className="img" />
-                    </dd>
-                  </div>
-                );
+                if(img == null){
+                  continue;
+                }else{
+                  elements.push(
+                    <div key={pokemonName}>
+                      <dt className="col-sm-3">Level {pokemon.cadena[pokemonName]} {pokemonName}</dt>
+                      <dd className="col-sm-9">
+                        <img src={img} alt={`Imagen de ${pokemonName}`} className="img" />
+                      </dd>
+                    </div>
+                  );
+                }
+                
               }
             }
             return elements;
