@@ -1,5 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 
+//Componente que muestra los movimientos del pokemon
 export default function Moves({pokemon}){
     return(<>
         <dl className="row">

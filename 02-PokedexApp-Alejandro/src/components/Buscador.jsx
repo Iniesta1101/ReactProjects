@@ -3,6 +3,7 @@ import PokemonCard from "./PokemonCard";
 
 
 export default function Buscador(){
+    //Buscador de pokemons
     const[inputS, setInput] = useState("");
     const[busqueda, setBusqueda] = useState("");
 

@@ -1,5 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 
+//Componente que muestra las estadisticas del pokemon
 export default function Stats({pokemon}){
     const totalStats = pokemon.stats.reduce((total, stat) => total + stat.value, 0);
     return(<>

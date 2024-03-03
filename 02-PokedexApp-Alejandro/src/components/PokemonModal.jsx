@@ -11,7 +11,9 @@ import Moves from './ModalContent/Moves';
 import Evolution from './ModalContent/Evolution';
 
 function PokemonModal({modalShow, setModalShow, selectedPokemon, pokemons}) {
+  //Pokemon seleccionado
   const pokemon = pokemons[selectedPokemon - 1]
+  //Estado para saber si el collapse esta abierto o cerrado
   const [openCollapse, setOpenCollapse] = useState(null)
 
   useEffect(() => {
@@ -20,6 +22,7 @@ function PokemonModal({modalShow, setModalShow, selectedPokemon, pokemons}) {
     }
   }, [modalShow])
 
+  //Funcion para abrir o cerrar el collapse
   function handleClick(id){
     setOpenCollapse((prevId) => (prevId === id ? null : id));
   }
@@ -72,6 +75,7 @@ function PokemonModal({modalShow, setModalShow, selectedPokemon, pokemons}) {
 
 export default PokemonModal;
 
+//Collapse se abrira o cerrara dependiendo del boton que se presione
 function Boton({name, pokemon, isOpen, onClick, id, pokemons}){
   let content;
 

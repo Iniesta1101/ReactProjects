@@ -2,6 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import './Template.css';
 import Buscador from "./Buscador.jsx";
 
+//Componente que contiene el buscador y el titulo
 export default function Template(){
     return(
         <>

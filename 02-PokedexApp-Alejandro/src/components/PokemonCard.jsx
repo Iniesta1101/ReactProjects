@@ -6,11 +6,14 @@ import PokemonModal from "./PokemonModal";
 import Cargando from './Carga.jsx';
 
 export default function PokemonCard({pokemonBuscado}){
+    //Listado de todos los pokemons
     const [pokemons, setPokemons] = useState([]);
+    //Modal
     const [modalShow, setModalShow] = useState(false);
+    //Pokemon seleccionado para mostrar en el modal
     const [selectedPokemon, setSelectedPokemon] = useState(null)
     
-
+    //Funcion para obtener los datos de un pokemon
     async function datosPokemon(nombre){
         let pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${nombre}`);
         let datosPokemon = await pokemon.json();
@@ -55,6 +58,7 @@ export default function PokemonCard({pokemonBuscado}){
             cadena: cadenaEvolucion 
         };
     }
+    //Obtener los datos de un pokemon
     useEffect(() => {
         async function getPokemons(){
             let kanto = await fetch("https://pokeapi.co/api/v2/pokedex/kanto");
@@ -70,17 +74,20 @@ export default function PokemonCard({pokemonBuscado}){
         getPokemons()
     }, [])
 
+    //Funcion para mostrar el modal
     const handleClick = (id) => {
         setSelectedPokemon(id);
         setModalShow(true)
     }
 
+    //Filtrar pokemons segun lo que se busque
     const filteredPokemons = pokemons.filter((pokemon) =>
         pokemon.name.toLowerCase().includes(pokemonBuscado.toLowerCase()) ||
         pokemon.id.toString() === pokemonBuscado ||
         pokemon.types.includes(pokemonBuscado.toLowerCase())
     );
 
+    //Mostramos las cartas de los pokemons
     {if(pokemons.length > 0){
     return <>{
         filteredPokemons.map(pokemon => 
@@ -109,10 +116,12 @@ export default function PokemonCard({pokemonBuscado}){
     <PokemonModal modalShow={modalShow} setModalShow={setModalShow} selectedPokemon={selectedPokemon} pokemons={pokemons}></PokemonModal>
   </>
     }else{
+        //Si no se han cargado los pokemons, mostramos un gif de carga
         return(<Cargando/>)
     }}
 }
 
+//Funcion para poner el id de los pokemons en el formato correcto
 export function pokemonId(id){
     if (id < 10) {
         return "#00" + id;
@@ -123,6 +132,7 @@ export function pokemonId(id){
     }
 }
 
+//Funcion para obtener la cadena de evolucion de un pokemon
 function obtenerEvolucion(cadena, dic){
     if(cadena){
         let pokemonInicial = cadena.species.name;

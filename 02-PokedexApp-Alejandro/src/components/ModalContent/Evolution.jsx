@@ -1,6 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import '../PokemonCard.css';
 
+//Componente que muestra la cadena de evolucion del pokemon
 export default function Evolution({pokemon, pokemons}){
 
 

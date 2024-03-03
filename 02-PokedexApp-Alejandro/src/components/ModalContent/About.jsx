@@ -1,5 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 
+//Componente que muestra la descripcion del pokemon
 export default function About({pokemon}){
     return(<>
         <dl className="row">
