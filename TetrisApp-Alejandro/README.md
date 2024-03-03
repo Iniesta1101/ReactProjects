@@ -20,3 +20,4 @@ Este proyecto consiste en el desarrollo de una aplicación móvil interactiva ut
 3. Esanear el código QR con la aplicación Expo GO
 
 ## Capturas
+![image](https://github.com/Iniesta1101/ReactProjects/assets/150248969/91ce730d-239c-476a-89f5-6199a32883a6)
