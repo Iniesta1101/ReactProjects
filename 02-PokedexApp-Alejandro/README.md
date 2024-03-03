@@ -15,6 +15,6 @@ Este proyecto se trata de una pokédex del universo Pokémon realizada con tecno
     4. Visita la URL `http://localhot:5173`
 
 ## Capturas
-
-
-
+![Captura de pantalla 2024-03-03 151558](https://github.com/Iniesta1101/ReactProjects/assets/150248969/077c31a9-56c3-4a43-adad-3fbbf75b98f2)
+![Captura de pantalla 2024-03-03 151632](https://github.com/Iniesta1101/ReactProjects/assets/150248969/7fd0f978-7eed-4820-80cb-059bad56f9ad)
+![Captura de pantalla 2024-03-03 151656](https://github.com/Iniesta1101/ReactProjects/assets/150248969/90201635-840c-473f-9dfa-140282d298a7)
